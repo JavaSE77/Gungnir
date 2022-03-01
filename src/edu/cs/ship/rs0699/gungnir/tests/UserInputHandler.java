@@ -1,7 +1,7 @@
-package edu.cs.ship.rs0699.engr499.Tests;
+package edu.cs.ship.rs0699.gungnir.tests;
 
-import edu.cs.ship.rs0699.engr499.InputHandler;
-import edu.cs.ship.rs0699.engr499.UserSettings;
+import edu.cs.ship.rs0699.gungnir.InputHandler;
+import edu.cs.ship.rs0699.gungnir.UserSettings;
 import junit.framework.TestCase;
 
 public class UserInputHandler extends TestCase {
