@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>Input the current weight and angle.</h1>
+<p>How to find the current angle: %ANGLETUTORIAL%</p>
+<p>How to find the current weight: %WEIGHTTUTORIAL%</p>
+<p>The current angle is set to: %ANGLE%</p>
+<p>The current angle is set to: %WEIGHT%</p>
+
+<form action="//%URL%/input/">
+  <label for="angle">Angle:</label><br>
+  <input type="text" id="angle" name="angle" value="45" placeholder='Enter the current angle'><br>
+  <label for="weight">Weight:</label><br>
+  <input type="text" id="weight" name="weight" value="5" placeholder='Enter the current weight'><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+</body>
+</html>
