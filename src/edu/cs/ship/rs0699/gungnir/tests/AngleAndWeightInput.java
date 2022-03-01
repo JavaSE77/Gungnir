@@ -3,7 +3,7 @@ package edu.cs.ship.rs0699.gungnir.tests;
 import edu.cs.ship.rs0699.gungnir.UserSettings;
 import junit.framework.TestCase;
 
-public class AngleInput extends TestCase {
+public class AngleAndWeightInput extends TestCase {
 
   
   public void testUserSettings() {

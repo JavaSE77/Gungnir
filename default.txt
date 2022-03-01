@@ -6,7 +6,7 @@
 
 <p><a href="//%URL%/input">Input Page</a></p>
 
-<p><a href="https://www.github.com/javase77">Documentation</a></p>
+<p><a href="https://www.github.com/javase77/Gungnir">Documentation</a></p>
 
 </body>
 </html>

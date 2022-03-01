@@ -4,6 +4,7 @@ public class UserSettings {
 
   private double angle = 0;
   private double weight = 0;
+  private String user = null;
   private static UserSettings singleton = null;
   
   //this is a singleton
@@ -40,6 +41,16 @@ public class UserSettings {
   }
   
   /**
+   * Set the user of the machine. This will default to null. 
+   * Users can use this to track their own throws. 
+   * Any string input is allowed, so this could be a username, ID number, or real name
+   * @param String user
+   * */
+  public void setUser(String user) { 
+    this.user = user;
+  }
+  
+  /**
    * Get the weight of the machine
    * @return the weight of the machine
    * */
@@ -55,5 +66,14 @@ public class UserSettings {
     return this.angle;
   }
   
+  /**
+   * get the user of the machine. This will default to null. 
+   * Users can use this to track their own throws. 
+   * Any string input is allowed, so this could be a username, ID number, or real name
+   * @return String user
+   * */
+  public String getUser() { 
+    return this.user;
+  }
   
 }
