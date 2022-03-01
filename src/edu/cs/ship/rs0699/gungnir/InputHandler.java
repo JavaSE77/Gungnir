@@ -31,6 +31,10 @@ public class InputHandler implements HttpHandler {
     
   }
   
+  /**
+   * int handleInput. handles the input String passed in from the URI
+   * @param String URI
+   * */
   public int handleInput(String URI) {
     if(Main.verbose) System.out.println(URI);
     //the way HTML uris work, every other element of this string will have a '/' deliminator. So we need to check every other 

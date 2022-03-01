@@ -56,6 +56,10 @@ public class ServerHandler {
     return null;
   }
   
+  /**
+   * void setPortRange. Normal range is 8000-8080
+   * @param int portRangeLower, int portRangeUpper
+   * */
   public void setPortRange(int portRangeLower, int portRangeUpper) {
 
     this.portRangeLower = portRangeLower;
@@ -63,14 +67,26 @@ public class ServerHandler {
     
   }
   
+  /**
+   * void setURL. Sets the url of the server handler. 
+   * @param String URL
+   * */
   public void setURL(String url) {
     this.url = url;
   }
   
+  /**
+   * int getBoundPort. returns the port the server is bound to
+   * @return int boundPort
+   * */
   public int getBoundPort() {
     return boundPort;
   }
   
+  /**
+   * String getURL. returns the url the server is running on
+   * @return String url
+   * */
   public String getURL() {
     return this.url;
   }

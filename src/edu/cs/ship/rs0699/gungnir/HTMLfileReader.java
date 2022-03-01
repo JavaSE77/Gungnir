@@ -6,6 +6,11 @@ import java.nio.file.Path;
 
 public class HTMLfileReader {
 
+  /**
+   * String readFile. reads the given file and replaces regex
+   * @param String fileName
+   * @return contents of the file with the regex changed
+   * */
   public String readFile(String fileName) {
     
     String fileContents = "file not found";
