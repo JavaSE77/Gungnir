@@ -1,6 +1,8 @@
 package edu.cs.ship.rs0699.gungnir;
 
 
+import javax.security.auth.login.Configuration;
+
 import com.sun.net.httpserver.HttpServer;
 
 public class Main {
@@ -11,8 +13,12 @@ public class Main {
   public static void main(String[] args) throws Exception {
     System.out.println("starting");
     
-    int portRangeLower = 8000;    
-    int portRangeUpper = 8080;
+    ConfigurationHandler config = ConfigurationHandler.getInstance();
+    config.readFile("config.txt");
+    verbose = config.verbose();
+    
+    int portRangeLower = config.portRangeLower();    
+    int portRangeUpper = config.portRangeUpper();
     ServerHandler serverHandler = ServerHandler.getInstance();
     
     //Remember, this must be configured on the same wifi network as the users of the machine. So if this is on ship secure,
@@ -21,7 +27,7 @@ public class Main {
     
     System.out.println("trying to bind to port range " + portRangeLower + " to " + portRangeUpper);
     serverHandler.setPortRange(portRangeLower, portRangeUpper);
-    serverHandler.setURL("localhost");
+    serverHandler.setURL(config.URL());
     HttpServer server = serverHandler.bindServer();
     if(server == null) {
       System.out.println("Unable to bind to ports within range. Server will close. "
@@ -29,7 +35,11 @@ public class Main {
           + " if this is the only machine on the network, restart this machine and the network to resolve.");
       return;
     } else {
-      System.out.println("HTTP is now online. To view to go: 127.0.0.1:" + serverHandler.getBoundPort());
+      if(config.URLincludesPort()) {
+      System.out.println("HTTP is now online. To view to go: "+ serverHandler.getURL()+":" + serverHandler.getBoundPort());
+      } else {
+        System.out.println("HTTP is now online. To view to go: "+ serverHandler.getURL());
+      }
     }
     server.createContext("/", new MainHandler());
     server.createContext("/input", new InputHandler());

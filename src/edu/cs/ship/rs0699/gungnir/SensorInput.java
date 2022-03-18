@@ -10,6 +10,9 @@ public class SensorInput {
   long sensor2 = 0;
   long sensor3 = 0;
   long sensor4 = 0;
+  
+  //assuming sensors are placed a set distance between each other
+  double distanceBetweenSensors = 100.0;
 
   private static SensorInput singleton = null;
   //this needs to be a singleton
@@ -43,6 +46,14 @@ public class SensorInput {
     sensorData[2] = sensor3;
     sensorData[3] = sensor4;
     return sensorData;
+  }
+  
+  /**
+   * double get distance between sensors
+   * @return the distance between sensors as defined in configuration
+   * */
+  public double getDistanceBetweenSensors() {
+    return distanceBetweenSensors;
   }
   
 }

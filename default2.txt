@@ -8,7 +8,6 @@
 
 <p><a href="https://www.github.com/javase77/Gungnir">Documentation</a></p>
 
-
 </body>
 </html>
 

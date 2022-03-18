@@ -1,0 +1,8 @@
+verbose=true
+portRangeLower=8000    
+portRangeUpper=8080
+URLincludesPort=true
+%URL%=localhost
+%ANGLETUTORIAL%=youtube.com
+%WEIGHTTUTORIAL%=youtube.com
+%NAMETUTORIAL%=youtube.com

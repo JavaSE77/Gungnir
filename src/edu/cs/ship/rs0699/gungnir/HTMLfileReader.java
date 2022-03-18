@@ -14,6 +14,7 @@ public class HTMLfileReader {
   public String readFile(String fileName) {
     
     String fileContents = "file not found";
+    ConfigurationHandler config = ConfigurationHandler.getInstance();
 
     
     try {  
@@ -27,10 +28,23 @@ public class HTMLfileReader {
       System.out.println("Because the file read returned an error, we displayed 'file not found' to the user" );
     }
     //get the url of the website. Replace all instances of %URL% with the sites url as set in the main
-    String url = ServerHandler.getInstance().getURL() + ":" + ServerHandler.getInstance().getBoundPort();
+    String url = null;
+    if(config.URLincludesPort()) {
+        url = ServerHandler.getInstance().getURL() + ":" + ServerHandler.getInstance().getBoundPort();
+    }else {
+        url = ServerHandler.getInstance().getURL();
+    }
+    
+    String ANGLETUTORIAL = config.ANGLETUTORIAL();
+    String NAMETUTORIAL = config.NAMETUTORIAL();
+    String WEIGHTTUTORIAL = config.WEIGHTTUTORIAL();
+    
     String angle = "" + UserSettings.getInstance().getAngle();
     String weight = "" + UserSettings.getInstance().getWeight();
-    fileContents = fileContents.replaceAll("%URL%", url).replaceAll("%ANGLE%", angle).replaceAll("%WEIGHT%", weight);
+    String name = "" + UserSettings.getInstance().getUser();
+    fileContents = fileContents.replaceAll("%URL%", url).replaceAll("%ANGLE%", angle).replaceAll("%WEIGHT%", weight)
+        .replaceAll("%NAME%", name).replaceAll("%ANGLETUTORIAL%", ANGLETUTORIAL)
+        .replaceAll("%NAMETUTORIAL%", NAMETUTORIAL).replaceAll("%WEIGHTTUTORIAL%", WEIGHTTUTORIAL);
     //return contents of the file read in as a string. If try catch throws exception, return "file not found"
     return fileContents;
   }

@@ -1,0 +1,8 @@
+verbose=true
+portRangeLower=1    
+portRangeUpper=2
+URLincludesPort=true
+%URL%=localhost
+%ANGLETUTORIAL%=ANGLETUTORIAL.com
+%WEIGHTTUTORIAL%=WEIGHTTUTORIAL.com
+%NAMETUTORIAL%=NAMETUTORIAL.com

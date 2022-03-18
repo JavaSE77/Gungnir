@@ -47,14 +47,19 @@ public class InputHandler implements HttpHandler {
     if(url.length >= 3 && url[2].contains("&")) {
       String angle = url[2].split("&")[0];
       String weight = url[2].split("&")[1];
+      String name = url[2].split("&")[2];
       //then we know the machine as set the angle
       if(Main.verbose) System.out.println("String angle " + angle );
+      if(Main.verbose) System.out.println("String weight " + weight );
+      if(Main.verbose) System.out.println("String name " + name );
       UserSettings.getInstance().setAngle(Double.parseDouble(angle.split("=")[1]));
       UserSettings.getInstance().setWeight(Double.parseDouble(weight.split("=")[1]));
-      if(Main.verbose) System.out.println(UserSettings.getInstance().getAngle());
+      UserSettings.getInstance().setUser(name.split("=")[1]);
+      if(Main.verbose) System.out.println("angle has been set to: " + UserSettings.getInstance().getAngle());
       //return response code 200 (success)
       return 200; 
     }
+    
     } catch(Exception e) {
       if(Main.verbose) e.printStackTrace();
       return 400;
