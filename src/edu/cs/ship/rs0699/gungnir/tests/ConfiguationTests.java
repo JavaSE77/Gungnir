@@ -1,5 +1,6 @@
 package edu.cs.ship.rs0699.gungnir.tests;
 
+
 import edu.cs.ship.rs0699.gungnir.ConfigurationHandler;
 import junit.framework.TestCase;
 
@@ -16,10 +17,11 @@ public class ConfiguationTests extends TestCase {
     
   }
 
-  public void testInitialValues() {
+
+  public void testAInitialValues() {
 
     ConfigurationHandler config = ConfigurationHandler.getInstance();
-    
+    config.readFile("config.txt");
     
     assertEquals(config.getConfiglocation(), "config.txt");
     assertEquals(config.verbose(), true);
