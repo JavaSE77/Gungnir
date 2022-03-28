@@ -38,13 +38,23 @@ public class HTMLfileReader {
     String ANGLETUTORIAL = config.ANGLETUTORIAL();
     String NAMETUTORIAL = config.NAMETUTORIAL();
     String WEIGHTTUTORIAL = config.WEIGHTTUTORIAL();
+    FileHandler cssFile = new FileHandler("website/nicepage.css");
+    FileHandler jsFile = new FileHandler("website/nicepage.js");
+    //image files must be encoded in base64
+    FileHandler backgroundFile = new FileHandler("website/images/background.txt");
+    FileHandler logoFile = new FileHandler("website/images/logo.txt");
+    String CSS = cssFile.readFile();
+    String background = backgroundFile.readFile();
+    String logo = logoFile.readFile();
     
     String angle = "" + UserSettings.getInstance().getAngle();
     String weight = "" + UserSettings.getInstance().getWeight();
     String name = "" + UserSettings.getInstance().getUser();
     fileContents = fileContents.replaceAll("%URL%", url).replaceAll("%ANGLE%", angle).replaceAll("%WEIGHT%", weight)
         .replaceAll("%NAME%", name).replaceAll("%ANGLETUTORIAL%", ANGLETUTORIAL)
-        .replaceAll("%NAMETUTORIAL%", NAMETUTORIAL).replaceAll("%WEIGHTTUTORIAL%", WEIGHTTUTORIAL);
+        .replaceAll("%NAMETUTORIAL%", NAMETUTORIAL).replaceAll("%WEIGHTTUTORIAL%", WEIGHTTUTORIAL).replaceAll("%INCLUDECSS%", CSS)
+        .replaceAll("%INCLUDEBACKGROUND%", background).replaceAll("%INCLUDELOGO%", logo);
+       
     //return contents of the file read in as a string. If try catch throws exception, return "file not found"
     return fileContents;
   }

@@ -43,6 +43,8 @@ public class Main {
     }
     server.createContext("/", new MainHandler());
     server.createContext("/input", new InputHandler());
+    server.createContext("/About", new PageHandler("About.html"));
+    server.createContext("/results", new PageHandler("Results.html"));
     server.setExecutor(null); // creates a default executor
     server.start();
 }

@@ -1,23 +1,24 @@
 package edu.cs.ship.rs0699.gungnir;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class CSVhandler {
+public class FileHandler {
   
   private String fileName;
   private boolean verbose = ConfigurationHandler.getInstance().verbose();
 
-  public CSVhandler(String fileName) {
+  public FileHandler(String fileName) {
       this.fileName = fileName;   
   }
   
   /**
-   * Read the entire CSV file as a string
+   * Read the entire file as a string
    * */
   public String readFile() {
     
@@ -37,16 +38,28 @@ public class CSVhandler {
       catch(IOException e) {  
           if (verbose) e.printStackTrace();  
           
-          System.out.println("There was an error reading the CSV file. Please correct the file before continuing");
+          System.out.println("There was an error reading the file file. Please correct the file before continuing");
   } 
   return sb.toString();
 }
 
+  /**
+   * Read the entire file as bytes
+   * */
+  public byte[] readFileAsBytes() {
+    
+    //Open the config file
+    File file = new File(fileName);     
+    byte[] bytes = fileName.getBytes(); 
+    
+  return bytes;
+}
+  
   
   /**
-   * Gets the line from the CSV file at the requested index
+   * Gets the line from the file at the requested index
    * @param int line number
-   * @return String in the CSV file at index
+   * @return String in the file at index
    * */
   public String getLine(int lineNumber) {
     String line = null;
@@ -70,15 +83,15 @@ public class CSVhandler {
       catch(IOException e) {  
           if (verbose) e.printStackTrace();  
           
-          System.out.println("There was an error reading the CSV file. Please correct the file before continuing");
+          System.out.println("There was an error reading the file. Please correct the file before continuing");
   } 
   return line;
 }
   
   
   /**
-   * Writes a line to the end of the CSV file. No error checking performed
-   * @param String line - line to append to CSV
+   * Writes a line to the end of the file. No error checking performed
+   * @param String line - line to append to file
    * */
   public void appendLineNoErrorChecking(String line) {
     try {
@@ -90,7 +103,7 @@ public class CSVhandler {
     } catch (IOException e) {
       if (verbose) e.printStackTrace();  
       
-      System.out.println("There was an error writing to the CSV file. Please correct the file before continuing");
+      System.out.println("There was an error writing to the file. Please correct the file before continuing");
     }
 
   }

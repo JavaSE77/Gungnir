@@ -1,2 +1,2 @@
-"LatD", "LatM", "LatS", "NS", "LonD", "LonM", "LonS", "EW", "City", "State""LatD", "LatM", "LatS", "NS", "LonD", "LonM", "LonS", "EW", "City", "State"
-"LatD", "LatM", "LatS", "NS", "LonD", "LonM", "LonS", "EW", "City", "State""LatD", "LatM", "LatS", "NS", "LonD", "LonM", "LonS", "EW", "City", "State"
+User,Distance,Weight,Speed,Acceleration,Force,sensor data
+TEST,1,5,12,2,20,121

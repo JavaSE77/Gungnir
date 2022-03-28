@@ -22,7 +22,7 @@ public class InputHandler implements HttpHandler {
     if(Main.verbose) System.out.println("returned response code: " + responseCode);
     
     HTMLfileReader reader = new HTMLfileReader();
-    String response = reader.readFile("inputPage.txt");
+    String response = reader.readFile("website/User-Input.html");
     exchange.sendResponseHeaders(responseCode, response.length());
     OutputStream os = exchange.getResponseBody();
     os.write(response.getBytes());
