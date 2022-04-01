@@ -3,7 +3,12 @@ package edu.cs.ship.rs0699.gungnir;
 
 import javax.security.auth.login.Configuration;
 
+import com.pi4j.io.gpio.GpioController;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.io.gpio.GpioPinDigitalInput;
+import com.pi4j.io.gpio.RaspiPin;
 import com.sun.net.httpserver.HttpServer;
+
 
 public class Main {
 
@@ -47,8 +52,40 @@ public class Main {
     server.createContext("/results", new PageHandler("Results.html"));
     server.setExecutor(null); // creates a default executor
     server.start();
+    
+    setupSensorArray();
+    
 }
- 
+  
+ public static void setupSensorArray() {
+   
+   //TODO move away from test data and handle the issue of having multiple CSV records
+  
+   CSVhandler CSV = new CSVhandler("testData.csv");
+   
+   System.out.println("Starting sensor array");
+   // create gpio controller
+   final GpioController gpio = GpioFactory.getInstance();
+   
+   SensorHandler sensorA = new SensorHandler(gpio, RaspiPin.GPIO_25);
+   GpioPinDigitalInput GPIOA = sensorA.setupPin();   
+   
+   SensorHandler sensorB = new SensorHandler(gpio, RaspiPin.GPIO_24);
+   GpioPinDigitalInput GPIOB = sensorB.setupPin();     
+   
+   SensorHandler sensorC = new SensorHandler(gpio, RaspiPin.GPIO_23);
+   GpioPinDigitalInput GPIOC = sensorC.setupPin();
+
+   SensorEventHandler sensorEventHandlerA = new SensorEventHandler();
+   sensorEventHandlerA.registerListener(GPIOA, CSV, true, false);
+   SensorEventHandler sensorEventHandlerB = new SensorEventHandler();
+   sensorEventHandlerB.registerListener(GPIOB, CSV, true, false);
+   SensorEventHandler sensorEventHandlerC = new SensorEventHandler();
+   sensorEventHandlerC.registerListener(GPIOC, CSV, true, true);
+   
+   CSV.initializeSensorRecords(sensorEventHandlerA,sensorEventHandlerB,sensorEventHandlerC);
+   
+ }
 
   
 }

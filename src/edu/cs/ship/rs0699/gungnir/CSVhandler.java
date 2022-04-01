@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class CSVhandler {
@@ -12,6 +14,10 @@ public class CSVhandler {
   private String fileName;
   private boolean verbose = ConfigurationHandler.getInstance().verbose();
 
+  private SensorEventHandler sensorEventHandlerA;
+  private SensorEventHandler sensorEventHandlerB;
+  private SensorEventHandler sensorEventHandlerC;
+  
   public CSVhandler(String fileName) {
       this.fileName = fileName;   
   }
@@ -93,6 +99,67 @@ public class CSVhandler {
       System.out.println("There was an error writing to the CSV file. Please correct the file before continuing");
     }
 
+  }
+  
+  
+  /**
+   * Writes a line to the end of the CSV file. fills in remaining fields
+   * @param Long sensorAtime, Long sensorBtime, Long sensorCtime
+   * */
+  public void addRecord() {
+    //CSV header looks like:
+    //User  Distance  Weight  Speed Acceleration  Force sensorA sensorB SensorC date
+    String user = "TEST";
+    String distance = null;
+    String weight = "-1";
+    String speed = "-1";
+    String acceleration = "-1";
+    String force = "-1";
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
+    Date date = new Date();
+    String dateHumanReadable = sdf.format(date); 
+    Long sensorAtime = (long) 0; 
+    Long sensorBtime = (long) 0;
+    Long sensorCtime = (long) 0;
+    if (sensorEventHandlerA != null) sensorAtime = sensorEventHandlerA.sensorTime;
+    if (sensorEventHandlerB != null) sensorBtime = sensorEventHandlerB.sensorTime;
+    if (sensorEventHandlerC != null) sensorCtime = sensorEventHandlerC.sensorTime;
+
+    StringBuilder sb = new StringBuilder();
+    sb.append(user);
+    sb.append(",");
+    sb.append(distance);
+    sb.append(",");
+    sb.append(weight);
+    sb.append(",");
+    sb.append(speed);
+    sb.append(",");
+    sb.append(weight);
+    sb.append(",");
+    sb.append(acceleration);
+    sb.append(",");
+    sb.append(force);
+    sb.append(",");
+    sb.append(sensorAtime);
+    sb.append(",");
+    sb.append(sensorBtime);
+    sb.append(",");
+    sb.append(sensorCtime);
+    sb.append(",");
+    sb.append(dateHumanReadable);
+    
+    appendLineNoErrorChecking(sb.toString());
+    
+    System.out.println("Added record to the CSV");
+    
+
+  }
+  
+  public void initializeSensorRecords(SensorEventHandler sensorEventHandlerA,
+      SensorEventHandler sensorEventHandlerB, SensorEventHandler sensorEventHandlerC) {
+    this.sensorEventHandlerA = sensorEventHandlerA;
+    this.sensorEventHandlerB = sensorEventHandlerB;
+    this.sensorEventHandlerC = sensorEventHandlerC;
   }
   
 }
