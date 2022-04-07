@@ -1,1 +1,2 @@
-pi4j --run -Xmx2000M -Xms200M -XX:PermSize=256m -XX:MaxPermSize=512m -jar server.jar
+#!/bin/bash
+lxterminal "pi4j --run -Xmx2000M -Xms200M -XX:PermSize=256m -XX:MaxPermSize=512m -jar server.jar"
