@@ -17,6 +17,7 @@ public class CSVhandler {
   private SensorEventHandler sensorEventHandlerA;
   private SensorEventHandler sensorEventHandlerB;
   private SensorEventHandler sensorEventHandlerC;
+  private UserSettings settings = UserSettings.getInstance();
   
   public CSVhandler(String fileName) {
       this.fileName = fileName;   
@@ -103,15 +104,15 @@ public class CSVhandler {
   
   
   /**
-   * Writes a line to the end of the CSV file. fills in remaining fields
-   * @param Long sensorAtime, Long sensorBtime, Long sensorCtime
+   * Writes a line to the end of the CSV file. fills in remaining fields from user settingsa
    * */
   public void addRecord() {
     //CSV header looks like:
     //User  Distance  Weight  Speed Acceleration  Force sensorA sensorB SensorC date
-    String user = "TEST";
+    String user = settings.getUser();
     String distance = null;
-    String weight = "-1";
+    String weight = settings.getUser();
+    String angle = "" + settings.getAngle();
     String speed = "-1";
     String acceleration = "-1";
     String force = "-1";
@@ -131,6 +132,8 @@ public class CSVhandler {
     sb.append(distance);
     sb.append(",");
     sb.append(weight);
+    sb.append(",");
+    sb.append(angle);
     sb.append(",");
     sb.append(speed);
     sb.append(",");
@@ -155,6 +158,11 @@ public class CSVhandler {
 
   }
   
+  /**
+   * Gives the CSV handler access to the sensor records
+   * @param SensorEventHandler sensorEventHandlerA,
+      SensorEventHandler sensorEventHandlerB, SensorEventHandler sensorEventHandlerC
+   * */
   public void initializeSensorRecords(SensorEventHandler sensorEventHandlerA,
       SensorEventHandler sensorEventHandlerB, SensorEventHandler sensorEventHandlerC) {
     this.sensorEventHandlerA = sensorEventHandlerA;

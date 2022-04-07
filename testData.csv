@@ -1,2 +1,2 @@
-User,Distance,Weight,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
-TEST,1,5,12,2,20,121,123,127,4/1/22
+User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
+TEST,1,5,45,12,2,20,121,123,127,4/1/22
