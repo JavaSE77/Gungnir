@@ -153,7 +153,7 @@ public class CSVhandler {
     
     appendLineNoErrorChecking(sb.toString());
     
-    System.out.println("Added record to the CSV");
+    if(Main.verbose) System.out.println("Added record to the CSV");
     
 
   }
