@@ -215,6 +215,7 @@ public class CSVhandler {
       }
       File currentRecordFile = new File("records-" + max +".csv");
       long fileSize = currentRecordFile.length();
+      System.out.println("File size: " + fileSize);
       if(fileSize < 1000000) {
         return folderName +"records-" + max +".csv";
       } else {
