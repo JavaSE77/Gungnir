@@ -6,6 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -188,7 +189,9 @@ public class CSVhandler {
   }
   
   public String pickCSVFile() {
-    String folderName = "records/";
+    Path currentRelativePath = Paths.get("");
+    String s = currentRelativePath.toAbsolutePath().toString();
+    String folderName = s +"/records/";
     
    File csvFolder = new File(folderName);
     
