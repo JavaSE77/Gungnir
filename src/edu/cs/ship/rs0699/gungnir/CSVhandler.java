@@ -194,7 +194,8 @@ public class CSVhandler {
     String folderName = s +"/records/";
     
    File csvFolder = new File(folderName);
-    
+
+   System.out.println(csvFolder.listFiles());
     if(csvFolder.listFiles() == null) {
       return folderName + "records-1.csv";
     } else {
