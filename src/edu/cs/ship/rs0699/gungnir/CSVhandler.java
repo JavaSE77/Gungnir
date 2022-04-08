@@ -1,6 +1,7 @@
 package edu.cs.ship.rs0699.gungnir;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
@@ -104,9 +105,17 @@ public class CSVhandler {
   
   
   /**
-   * Writes a line to the end of the CSV file. fills in remaining fields from user settingsa
+   * Writes a line to the end of the CSV file. fills in remaining fields from user settings
    * */
   public void addRecord() {
+    
+    File currentRecordFile = new File(fileName);
+    long fileSize = currentRecordFile.length();
+    if(fileSize < 1000000) {
+      fileName = pickCSVFile();
+      appendLineNoErrorChecking("User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date");
+    }
+    
     //CSV header looks like:
     //User  Distance  Weight  Speed Acceleration  Force sensorA sensorB SensorC date
     String user = settings.getUser();
@@ -169,5 +178,57 @@ public class CSVhandler {
     this.sensorEventHandlerB = sensorEventHandlerB;
     this.sensorEventHandlerC = sensorEventHandlerC;
   }
+  
+  public String pickCSVFile() {
+    String folderName = "/records";
+
+    File csvFolder = new File(folderName);
+    if (! csvFolder.exists()){
+      csvFolder.mkdirs();
+    }
+    
+    File[] listOfFiles = csvFolder.listFiles();
+    
+    if(listOfFiles.length == 0) {
+      File yourFile = new File("records-1.csv");
+      try {
+       yourFile.createNewFile();
+     } catch (IOException e) {
+       // TODO Auto-generated catch block
+       if(verbose) e.printStackTrace();
+     }
+      return "records-1.csv";
+    } else {
+      //if there are files in the directory, get them. 
+      int max = 1;
+      for(int i = 1; i < listOfFiles.length; i++) {
+        String[] splitFileName = listOfFiles[i].getName().split("-");
+        if(splitFileName.length > 1) {
+          int fileNum = Integer.parseInt(splitFileName[1].split(".")[0]);
+          if (fileNum > max) {
+            max = fileNum;
+          }
+        }
+        
+      }
+      File currentRecordFile = new File("records-" + max +".csv");
+      long fileSize = currentRecordFile.length();
+      if(fileSize < 1000000) {
+        return "records-" + max +".csv";
+      } else {
+        File nextRecordFile = new File("records-" + max+1 +".csv");
+        try {
+         nextRecordFile.createNewFile();
+       } catch (IOException e) {
+         // TODO Auto-generated catch block
+         e.printStackTrace();
+       }
+        return "records-" + max+1 +".csv";
+      }
+      
+    }
+    
+  }
+
   
 }
