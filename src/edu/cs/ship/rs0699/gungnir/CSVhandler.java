@@ -215,7 +215,7 @@ public class CSVhandler {
         
       }
 
-      Path filePath = Paths.get("records-" + max +".csv");
+      Path filePath = Paths.get(s + "records-" + max +".csv");
       FileChannel fileChannel;
       long fileSize = 0;
       try {
