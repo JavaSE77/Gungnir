@@ -32,6 +32,7 @@ public class SensorEventHandler {
               //state is not LOW, meaning the beam has been restored
               if (verbose) System.out.println(event.getPin() + " changed " + (System.currentTimeMillis() - sensorTime) + "ms ago");
               if (master) {
+                //add a part in here to prevent duplicate records
                 CSV.addRecord();
               }
             }

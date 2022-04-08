@@ -195,11 +195,12 @@ public class CSVhandler {
     
    File csvFolder = new File(folderName);
 
-   System.out.println(csvFolder.listFiles());
-    if(csvFolder.listFiles() == null) {
+   
+   File[] listOfFiles = csvFolder.listFiles();
+   System.out.println(listOfFiles.length);
+    if(listOfFiles.length == 0) {
       return folderName + "records-1.csv";
     } else {
-      File[] listOfFiles = csvFolder.listFiles();
       //if there are files in the directory, get them. 
       int max = 1;
       for(int i = 1; i < listOfFiles.length; i++) {
