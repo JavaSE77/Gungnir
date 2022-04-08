@@ -95,7 +95,7 @@ public class CSVhandler {
       
       File file = new File(fileName); 
       if(!file.exists()) {
-        file.getParentFile().mkdirs(); // Will create parent directories if not exists
+        //file.getParentFile().mkdirs(); // Will create parent directories if not exists
         file.createNewFile();
       }
       
