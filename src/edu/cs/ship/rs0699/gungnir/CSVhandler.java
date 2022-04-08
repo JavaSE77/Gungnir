@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -213,9 +214,18 @@ public class CSVhandler {
         }
         
       }
-      File currentRecordFile = new File("records-" + max +".csv");
-      long fileSize = currentRecordFile.length();
-      System.out.println("File size: " + fileSize);
+
+      Path filePath = Paths.get("records-" + max +".csv");
+      FileChannel fileChannel;
+      long fileSize = 0;
+      try {
+        fileChannel = FileChannel.open(filePath);
+        fileSize = fileChannel.size();
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      System.out.println("file size: " + fileSize);
       if(fileSize < 1000000) {
         return folderName +"records-" + max +".csv";
       } else {
