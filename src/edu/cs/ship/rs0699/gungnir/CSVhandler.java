@@ -3,9 +3,10 @@ package edu.cs.ship.rs0699.gungnir;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -181,12 +182,13 @@ public class CSVhandler {
   
   public String pickCSVFile() {
     String folderName = "/records";
-
-    File csvFolder = new File(folderName);
-    if (! csvFolder.exists()){
-      csvFolder.mkdirs();
+    try {
+      Files.createDirectories(Paths.get(folderName));
+    } catch (IOException e1) {
+      // TODO Auto-generated catch block
+      if (verbose) e1.printStackTrace();
     }
-   
+   File csvFolder = new File(folderName);
     
     if(csvFolder.listFiles() == null) {
       File yourFile = new File("records-1.csv");
@@ -196,7 +198,7 @@ public class CSVhandler {
        // TODO Auto-generated catch block
        if(verbose) e.printStackTrace();
      }
-      return "records-1.csv";
+      return folderName + "/records-1.csv";
     } else {
       File[] listOfFiles = csvFolder.listFiles();
       //if there are files in the directory, get them. 
@@ -214,7 +216,7 @@ public class CSVhandler {
       File currentRecordFile = new File("records-" + max +".csv");
       long fileSize = currentRecordFile.length();
       if(fileSize < 1000000) {
-        return "records-" + max +".csv";
+        return folderName + "/" +"records-" + max +".csv";
       } else {
         File nextRecordFile = new File("records-" + max+1 +".csv");
         try {
@@ -223,7 +225,7 @@ public class CSVhandler {
          // TODO Auto-generated catch block
          e.printStackTrace();
        }
-        return "records-" + max+1 +".csv";
+        return folderName + "/" +"records-" + max+1 +".csv";
       }
       
     }
