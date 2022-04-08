@@ -91,8 +91,15 @@ public class CSVhandler {
    * */
   public void appendLineNoErrorChecking(String line) {
     try {
+      
+      File file = new File(fileName); 
+      if(!file.exists()) {
+        file.getParentFile().mkdirs(); // Will create parent directories if not exists
+        file.createNewFile();
+      }
+      
     BufferedWriter outputStream = new BufferedWriter(new FileWriter(fileName, true));
-
+    
       outputStream.append("\n" + line);
 
       outputStream.close();
@@ -182,22 +189,10 @@ public class CSVhandler {
   
   public String pickCSVFile() {
     String folderName = "/records";
-    try {
-      Files.createDirectories(Paths.get(folderName));
-    } catch (IOException e1) {
-      // TODO Auto-generated catch block
-      if (verbose) e1.printStackTrace();
-    }
+    
    File csvFolder = new File(folderName);
     
     if(csvFolder.listFiles() == null) {
-      File yourFile = new File("records-1.csv");
-      try {
-       yourFile.createNewFile();
-     } catch (IOException e) {
-       // TODO Auto-generated catch block
-       if(verbose) e.printStackTrace();
-     }
       return folderName + "/records-1.csv";
     } else {
       File[] listOfFiles = csvFolder.listFiles();
@@ -218,13 +213,6 @@ public class CSVhandler {
       if(fileSize < 1000000) {
         return folderName + "/" +"records-" + max +".csv";
       } else {
-        File nextRecordFile = new File("records-" + max+1 +".csv");
-        try {
-         nextRecordFile.createNewFile();
-       } catch (IOException e) {
-         // TODO Auto-generated catch block
-         e.printStackTrace();
-       }
         return folderName + "/" +"records-" + max+1 +".csv";
       }
       
