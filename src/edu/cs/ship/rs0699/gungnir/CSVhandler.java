@@ -188,12 +188,12 @@ public class CSVhandler {
   }
   
   public String pickCSVFile() {
-    String folderName = "/records";
+    String folderName = "records/";
     
    File csvFolder = new File(folderName);
     
     if(csvFolder.listFiles() == null) {
-      return folderName + "/records-1.csv";
+      return folderName + "records-1.csv";
     } else {
       File[] listOfFiles = csvFolder.listFiles();
       //if there are files in the directory, get them. 
@@ -211,9 +211,9 @@ public class CSVhandler {
       File currentRecordFile = new File("records-" + max +".csv");
       long fileSize = currentRecordFile.length();
       if(fileSize < 1000000) {
-        return folderName + "/" +"records-" + max +".csv";
+        return folderName +"records-" + max +".csv";
       } else {
-        return folderName + "/" +"records-" + max+1 +".csv";
+        return folderName +"records-" + max+1 +".csv";
       }
       
     }
