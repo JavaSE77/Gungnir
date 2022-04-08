@@ -111,7 +111,7 @@ public class CSVhandler {
     
     File currentRecordFile = new File(fileName);
     long fileSize = currentRecordFile.length();
-    if(fileSize < 1000000) {
+    if(fileSize > 1000000) {
       fileName = pickCSVFile();
       appendLineNoErrorChecking("User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date");
     }
@@ -186,10 +186,9 @@ public class CSVhandler {
     if (! csvFolder.exists()){
       csvFolder.mkdirs();
     }
+   
     
-    File[] listOfFiles = csvFolder.listFiles();
-    
-    if(listOfFiles.length == 0) {
+    if(csvFolder.listFiles() == null) {
       File yourFile = new File("records-1.csv");
       try {
        yourFile.createNewFile();
@@ -199,6 +198,7 @@ public class CSVhandler {
      }
       return "records-1.csv";
     } else {
+      File[] listOfFiles = csvFolder.listFiles();
       //if there are files in the directory, get them. 
       int max = 1;
       for(int i = 1; i < listOfFiles.length; i++) {
