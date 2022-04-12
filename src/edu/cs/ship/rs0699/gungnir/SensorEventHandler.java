@@ -7,7 +7,7 @@ import com.pi4j.io.gpio.event.GpioPinListenerDigital;
 public class SensorEventHandler {
 
   public Long sensorTime = System.currentTimeMillis();
-  
+  public long lastRecord = System.currentTimeMillis();
 
   public SensorEventHandler() {
     
@@ -32,8 +32,13 @@ public class SensorEventHandler {
               //state is not LOW, meaning the beam has been restored
               if (verbose) System.out.println(event.getPin() + " changed " + (System.currentTimeMillis() - sensorTime) + "ms ago");
               if (master) {
+                //Make sure we are not adding duplicate records, we are making sure that
+                //the time sense last record is at least 100ms
+                if((System.currentTimeMillis() - lastRecord) > 100) {
+                lastRecord = System.currentTimeMillis();
                 //add a part in here to prevent duplicate records
                 CSV.addRecord();
+                }
               }
             }
             

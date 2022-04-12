@@ -229,7 +229,8 @@ public class CSVhandler {
       if(fileSize < 1000000) {
         return folderName +"records-" + max +".csv";
       } else {
-        return folderName +"records-" + max+1 +".csv";
+        int newMax = max+1;
+        return folderName +"records-" + newMax +".csv";
       }
       
     }
