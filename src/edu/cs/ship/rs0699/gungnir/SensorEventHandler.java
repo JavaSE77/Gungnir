@@ -8,6 +8,8 @@ public class SensorEventHandler {
 
   public Long sensorTime = System.currentTimeMillis();
   public long lastRecord = System.currentTimeMillis();
+  //this will prevent the sensors from being read out of order
+  public boolean hasRecord = false;
 
   public SensorEventHandler() {
     
@@ -35,9 +37,10 @@ public class SensorEventHandler {
                 //Make sure we are not adding duplicate records, we are making sure that
                 //the time sense last record is at least 100ms
                 if((System.currentTimeMillis() - lastRecord) > 100) {
-                lastRecord = System.currentTimeMillis();
-                //add a part in here to prevent duplicate records
-                CSV.addRecord();
+                  lastRecord = System.currentTimeMillis();
+                  hasRecord = true;
+                  //add a part in here to prevent duplicate records
+                  CSV.addRecord();
                 }
               }
             }

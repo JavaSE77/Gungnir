@@ -117,7 +117,31 @@ public class CSVhandler {
   /**
    * Writes a line to the end of the CSV file. fills in remaining fields from user settings
    * */
-  public void addRecord() {
+  public void addRecord() { 
+
+    Long sensorAtime = (long) 0; 
+    Long sensorBtime = (long) 0;
+    Long sensorCtime = (long) 0;
+    //make sure all the sensors are connected
+    if  ((sensorEventHandlerA != null) && (sensorEventHandlerB != null) && (sensorEventHandlerC != null)) {
+     
+      //Make sure the sensors all have a record. this will prevent the sensors from reading in 
+      //reverse order
+      if(sensorEventHandlerA.hasRecord && sensorEventHandlerB.hasRecord && sensorEventHandlerC.hasRecord) {
+        
+        sensorAtime = sensorEventHandlerA.sensorTime;
+        sensorEventHandlerA.hasRecord = false;
+        sensorBtime = sensorEventHandlerB.sensorTime;
+        sensorEventHandlerB.hasRecord = false;
+        sensorCtime = sensorEventHandlerC.sensorTime;
+        sensorEventHandlerC.hasRecord = false;
+        
+        
+      }  
+      
+    }
+    
+    
     
     File currentRecordFile = new File(fileName);
     long fileSize = currentRecordFile.length();
@@ -138,12 +162,9 @@ public class CSVhandler {
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
     Date date = new Date();
     String dateHumanReadable = sdf.format(date); 
-    Long sensorAtime = (long) 0; 
-    Long sensorBtime = (long) 0;
-    Long sensorCtime = (long) 0;
-    if (sensorEventHandlerA != null) sensorAtime = sensorEventHandlerA.sensorTime;
-    if (sensorEventHandlerB != null) sensorBtime = sensorEventHandlerB.sensorTime;
-    if (sensorEventHandlerC != null) sensorCtime = sensorEventHandlerC.sensorTime;
+    //Before we add a line to the file, lets make sure the sensors aren't reading a negative
+    //value. This is the case when the slider is returning to be thrown again
+    
 
     StringBuilder sb = new StringBuilder();
     sb.append(user);
