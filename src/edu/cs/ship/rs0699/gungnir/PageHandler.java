@@ -9,9 +9,11 @@ import com.sun.net.httpserver.HttpHandler;
 public class PageHandler implements HttpHandler {
   
   String pageName = null;
+  CSVhandler csv;
   
-  public PageHandler(String pageName) {
+  public PageHandler(String pageName, CSVhandler csv) {
     this.pageName = pageName;
+    this.csv = csv;
   }
   
 
@@ -23,7 +25,7 @@ public class PageHandler implements HttpHandler {
     if(Main.verbose) System.out.println("returned response code: " + responseCode);
     
     HTMLfileReader reader = new HTMLfileReader();
-    String response = reader.readFile("website/" + pageName);
+    String response = reader.readFile("website/" + pageName, csv);
     exchange.sendResponseHeaders(responseCode, response.length());
     OutputStream os = exchange.getResponseBody();
     os.write(response.getBytes());

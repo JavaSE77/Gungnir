@@ -17,13 +17,18 @@ public class Calculations {
       return singleton;
   }
   
-  public double getSpeed(long[] input, double distance) {
+  /**
+   * long[] input, double distance
+   * readings from the 3 sensors, amount of distance between the fixed sensors
+   * @return double speed 
+   * */
+  public double getSpeed(long[] sensorReadings, double distance) {
     
-    if(input.length == 4) {
+    if(sensorReadings.length == 3) {
       
       //for our speed calculation, we are using distance / time delta
       
-      long timeDelta = input[3] - input[0];
+      long timeDelta = sensorReadings[2] - sensorReadings[0];
       
       double speed = distance / timeDelta;
       
@@ -32,6 +37,45 @@ public class Calculations {
     
     return -1;
   }
+  
+  /**
+   * long[] input, double distance
+   * readings from the 3 sensors, amount of distance between the fixed sensors
+   * @return the abs of acceleration
+   * */
+  public double getAcceleration(long[] input, double distance) {
+    
+    //we should have three values from the sensors
+    if(input.length == 3) {
+      
+      //get the speed from the first two, and compare it to the second two
+      
+      long timeDeltaA = input[1] - input[0];
+      long timeDeltaB = input[2] - input[1];
+      
+      //change is distance / change in time
+      double acceleration = distance / ((timeDeltaB - timeDeltaA) / 1000);
+      
+      return Math.abs(acceleration);
+    }
+    
+    return -1;
+  }
+  
+  /**
+   * double acceleration, double weight, double gravity
+   * (all units must be the same type of units, either SI or imperial)
+   * @return double force
+   * */
+  public double getForce(double acceleration, double weight, double gravity) {
+    //f = m * A
+    // m = weight * g
+    double m = weight * gravity;
+
+    
+    return acceleration * m;
+  }
+  
   
   
 }

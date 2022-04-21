@@ -11,7 +11,7 @@ public class HTMLfileReader {
    * @param String fileName
    * @return contents of the file with the regex changed
    * */
-  public String readFile(String fileName) {
+  public String readFile(String fileName, CSVhandler csv) {
     
     String fileContents = "file not found";
     ConfigurationHandler config = ConfigurationHandler.getInstance();
@@ -50,10 +50,27 @@ public class HTMLfileReader {
     String angle = "" + UserSettings.getInstance().getAngle();
     String weight = "" + UserSettings.getInstance().getWeight();
     String name = "" + UserSettings.getInstance().getUser();
+    
+    String distance = "";
+    String speed = "";
+    String acceleration = "";
+    String force = "";
+    
+    if(csv != null) {
+      String[] csvRecord = csv.getLastRecord().split(",");
+      //CSV record looks like this:
+      //User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
+      distance = csvRecord[1].replaceAll(",", "");
+      speed = csvRecord[4].replaceAll(",", "");
+      acceleration = csvRecord[5].replaceAll(",", "");
+      force = csvRecord[6].replaceAll(",", "");
+    }
     fileContents = fileContents.replaceAll("%URL%", url).replaceAll("%ANGLE%", angle).replaceAll("%WEIGHT%", weight)
         .replaceAll("%NAME%", name).replaceAll("%ANGLETUTORIAL%", ANGLETUTORIAL)
         .replaceAll("%NAMETUTORIAL%", NAMETUTORIAL).replaceAll("%WEIGHTTUTORIAL%", WEIGHTTUTORIAL).replaceAll("%INCLUDECSS%", CSS)
-        .replaceAll("%INCLUDEBACKGROUND%", background).replaceAll("%INCLUDELOGO%", logo);
+        .replaceAll("%INCLUDEBACKGROUND%", background).replaceAll("%INCLUDELOGO%", logo)
+        .replaceAll("%DISTANCE%", distance).replaceAll("%SPEED%", speed).replaceAll("%ACCELERATION%", acceleration)
+        .replaceAll("%FORCE%", force);
        
     //return contents of the file read in as a string. If try catch throws exception, return "file not found"
     return fileContents;

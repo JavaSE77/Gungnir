@@ -19,7 +19,7 @@ public class MainHandler implements HttpHandler {
     //second page is to display the output of the last run. Refreshes every few seconds.
 
     HTMLfileReader reader = new HTMLfileReader();
-    String response = reader.readFile("website/Home.html");
+    String response = reader.readFile("website/Home.html", null);
     exchange.sendResponseHeaders(200, response.length());
     OutputStream os = exchange.getResponseBody();
     os.write(response.getBytes());

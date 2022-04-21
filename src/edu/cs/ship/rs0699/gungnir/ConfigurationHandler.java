@@ -16,6 +16,7 @@ public class ConfigurationHandler {
   private Boolean verbose = true;
   private int portRangeLower = 8000;
   private int portRangeUpper = 8080;
+  private double distance = 2;
   private Boolean URLincludesPort = true;
   private String URL = "localhost";
   private String ANGLETUTORIAL = "youtube.com";
@@ -76,6 +77,9 @@ public class ConfigurationHandler {
           }
           else if(values[0].equalsIgnoreCase("%NAMETUTORIAL%")) {
             NAMETUTORIAL = values[1];
+          }
+          else if(values[0].equalsIgnoreCase("distanceBetweenSensors")) {
+            distance = Double.parseDouble(values[1].trim());
           } else if (verbose) {
             System.out.println("We found an unknown key in the configuration. Key: " + values[0] + " value: " + values[1]);
           }
@@ -167,5 +171,13 @@ public class ConfigurationHandler {
    * */
   public String NAMETUTORIAL() {
     return NAMETUTORIAL;
+  }
+  
+  /**
+   * double distance
+   * @return double value inconfig
+   * */
+  public double getDistance() {
+    return distance;
   }
 }

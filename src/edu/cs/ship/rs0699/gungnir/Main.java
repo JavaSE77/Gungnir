@@ -16,6 +16,7 @@ import com.sun.net.httpserver.HttpServer;
 public class Main {
 
   public static boolean verbose = true;
+  public static double distanceBetweenSensors = -1;
   
   
   public static void main(String[] args) throws Exception {
@@ -24,6 +25,10 @@ public class Main {
     ConfigurationHandler config = ConfigurationHandler.getInstance();
     config.readFile("config.txt");
     verbose = config.verbose();
+    distanceBetweenSensors = config.getDistance();
+    
+    //get the csv handler
+    CSVhandler CSV = new CSVhandler("testData.csv");
     
     int portRangeLower = config.portRangeLower();    
     int portRangeUpper = config.portRangeUpper();
@@ -51,20 +56,17 @@ public class Main {
     }
     server.createContext("/", new MainHandler());
     server.createContext("/input", new InputHandler());
-    server.createContext("/About", new PageHandler("About.html"));
-    server.createContext("/results", new PageHandler("Results.html"));
+    server.createContext("/About", new PageHandler("About.html",CSV));
+    server.createContext("/results", new PageHandler("Results.html",CSV));
     server.setExecutor(null); // creates a default executor
     server.start();
     
-    setupSensorArray();
+    setupSensorArray(CSV);
     
 }
   
- public static void setupSensorArray() {
+ public static void setupSensorArray(CSVhandler CSV) {
    
-   //TODO move away from test data and handle the issue of having multiple CSV records
-  
-   CSVhandler CSV = new CSVhandler("testData.csv");
    
    System.out.println("Starting sensor array");
    // create gpio controller

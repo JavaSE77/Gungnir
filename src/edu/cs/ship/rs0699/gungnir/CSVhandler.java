@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -22,6 +21,8 @@ public class CSVhandler {
   private SensorEventHandler sensorEventHandlerB;
   private SensorEventHandler sensorEventHandlerC;
   private UserSettings settings = UserSettings.getInstance();
+  private Calculations calculator = Calculations.getInstance();
+  private double distanceBetweenSensors = Main.distanceBetweenSensors;
   
   public CSVhandler(String fileName) {
       this.fileName = fileName;   
@@ -86,6 +87,28 @@ public class CSVhandler {
   return line;
 }
   
+  public String getLastRecord() {
+    String line = null;
+    //just on the off case the file has changed between reads
+    fileName = pickCSVFile();
+    
+    try {  
+      //Open the csv file
+      FileInputStream inputStream=new FileInputStream(fileName);       
+      Scanner scanner=new Scanner(inputStream);
+      while(scanner.hasNextLine()) {
+          line = scanner.nextLine();
+      }
+      scanner.close(); 
+    }  
+      catch(IOException e) {  
+          if (verbose) e.printStackTrace();  
+          
+          System.out.println("There was an error reading the CSV file. Please correct the file before continuing");
+  } 
+  return line;
+  }
+  
   
   /**
    * Writes a line to the end of the CSV file. No error checking performed
@@ -119,9 +142,9 @@ public class CSVhandler {
    * */
   public void addRecord() { 
 
-    Long sensorAtime = (long) 0; 
-    Long sensorBtime = (long) 0;
-    Long sensorCtime = (long) 0;
+    long sensorAtime = (long) 0; 
+    long sensorBtime = (long) 0;
+    long sensorCtime = (long) 0;
     //make sure all the sensors are connected
     if  ((sensorEventHandlerA != null) && (sensorEventHandlerB != null) && (sensorEventHandlerC != null)) {
      
@@ -153,12 +176,14 @@ public class CSVhandler {
     //CSV header looks like:
     //User  Distance  Weight  Speed Acceleration  Force sensorA sensorB SensorC date
     String user = settings.getUser();
-    String distance = null;
-    String weight = settings.getUser();
-    String angle = "" + settings.getAngle();
-    String speed = "-1";
-    String acceleration = "-1";
-    String force = "-1";
+    //make sure to set this to the actual distance of the sensors
+    double distance = distanceBetweenSensors;
+    double weight = settings.getWeight();
+    double angle = settings.getAngle();
+    long[] sensorReadings = {sensorAtime,sensorBtime,sensorCtime};
+    double speed = calculator.getSpeed(sensorReadings, distance);
+    double acceleration = calculator.getAcceleration(sensorReadings, distance);
+    double force = calculator.getForce(acceleration, weight, 32.0);
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
     Date date = new Date();
     String dateHumanReadable = sdf.format(date); 
