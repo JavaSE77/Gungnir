@@ -30,4 +30,12 @@ public class CSVtests extends TestCase{
     
   }
   
+  @Test
+  public void testAddRecord() {
+    System.out.println("CSV OUTPUT");
+    CSVhandler handler = new CSVhandler("testData.csv");
+    System.out.println(handler.pickCSVFile());
+    System.out.println(handler.getFileName());
+  }
+  
 }

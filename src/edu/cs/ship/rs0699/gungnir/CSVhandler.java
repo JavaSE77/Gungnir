@@ -243,8 +243,9 @@ public class CSVhandler {
 
    
    File[] listOfFiles = csvFolder.listFiles();
-   System.out.println(listOfFiles.length);
-    if(listOfFiles.length == 0) {
+   //Make sure to check if the list of files is null. If it is, then we cannot
+   //get the length
+    if(listOfFiles == null || listOfFiles.length == 0) {
       return folderName + "records-1.csv";
     } else {
       //if there are files in the directory, get them. 
@@ -280,6 +281,10 @@ public class CSVhandler {
       
     }
     
+  }
+  
+  public String getFileName() {
+    return fileName;
   }
 
   
