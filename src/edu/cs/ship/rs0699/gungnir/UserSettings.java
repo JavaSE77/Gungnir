@@ -37,7 +37,7 @@ public class UserSettings {
    * @param double weight
    * */
   public void setWeight(double weight) { 
-    this.weight = weight;
+    this.weight = weight % 1000;
   }
   
   /**
@@ -47,7 +47,11 @@ public class UserSettings {
    * @param String user
    * */
   public void setUser(String user) { 
-    this.user = user;
+    if(user.length() > 100) { 
+      this.user = "INVALIDNAME";
+    } else {
+      this.user = user;
+    }
   }
   
   /**

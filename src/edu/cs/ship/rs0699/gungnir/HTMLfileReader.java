@@ -57,15 +57,18 @@ public class HTMLfileReader {
     String force = "";
     
     if(csv != null) {
-      if (Main.verbose) System.out.println(csv.getLastRecord());
+      try {
       String[] csvRecord = csv.getLastRecord().split(",");
-      if (Main.verbose) System.out.println(csvRecord.toString());
       //CSV record looks like this:
       //User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
       distance = csvRecord[1].replaceAll(",", "");
       speed = csvRecord[4].replaceAll(",", "");
       acceleration = csvRecord[5].replaceAll(",", "");
       force = csvRecord[6].replaceAll(",", "");
+      } catch (IndexOutOfBoundsException e) {
+        if (Main.verbose) e.printStackTrace();
+        System.out.println("Error reading results from CSV");
+      }
     }
     fileContents = fileContents.replaceAll("%URL%", url).replaceAll("%ANGLE%", angle).replaceAll("%WEIGHT%", weight)
         .replaceAll("%NAME%", name).replaceAll("%ANGLETUTORIAL%", ANGLETUTORIAL)
