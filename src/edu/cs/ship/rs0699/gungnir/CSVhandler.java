@@ -121,6 +121,8 @@ public class CSVhandler {
       if(!file.exists()) {
         //file.getParentFile().mkdirs(); // Will create parent directories if not exists
         file.createNewFile();
+        appendLineNoErrorChecking("User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date");
+        appendLineNoErrorChecking("Test,100,5,45,100,10,200,0,0,0,4/1/22");
       }
       
     BufferedWriter outputStream = new BufferedWriter(new FileWriter(fileName, true));
@@ -141,6 +143,8 @@ public class CSVhandler {
    * Writes a line to the end of the CSV file. fills in remaining fields from user settings
    * */
   public void addRecord() { 
+    
+    fileName = pickCSVFile();
 
     long sensorAtime = (long) 0; 
     long sensorBtime = (long) 0;
@@ -167,11 +171,6 @@ public class CSVhandler {
     
     
     File currentRecordFile = new File(fileName);
-    long fileSize = currentRecordFile.length();
-    if(fileSize > 1000000) {
-      fileName = pickCSVFile();
-      appendLineNoErrorChecking("User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date");
-    }
     
     //CSV header looks like:
     //User  Distance  Weight  Speed Acceleration  Force sensorA sensorB SensorC date
