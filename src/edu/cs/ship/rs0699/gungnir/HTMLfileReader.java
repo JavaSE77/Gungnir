@@ -56,15 +56,17 @@ public class HTMLfileReader {
     String acceleration = "";
     String force = "";
     
-//    if(csv != null) {
-//      String[] csvRecord = csv.getLastRecord().split(",");
-//      //CSV record looks like this:
-//      //User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
-//      distance = csvRecord[1].replaceAll(",", "");
-//      speed = csvRecord[4].replaceAll(",", "");
-//      acceleration = csvRecord[5].replaceAll(",", "");
-//      force = csvRecord[6].replaceAll(",", "");
-//    }
+    if(csv != null) {
+      if (Main.verbose) System.out.println(csv.getLastRecord());
+      String[] csvRecord = csv.getLastRecord().split(",");
+      if (Main.verbose) System.out.println(csvRecord.toString());
+      //CSV record looks like this:
+      //User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
+      distance = csvRecord[1].replaceAll(",", "");
+      speed = csvRecord[4].replaceAll(",", "");
+      acceleration = csvRecord[5].replaceAll(",", "");
+      force = csvRecord[6].replaceAll(",", "");
+    }
     fileContents = fileContents.replaceAll("%URL%", url).replaceAll("%ANGLE%", angle).replaceAll("%WEIGHT%", weight)
         .replaceAll("%NAME%", name).replaceAll("%ANGLETUTORIAL%", ANGLETUTORIAL)
         .replaceAll("%NAMETUTORIAL%", NAMETUTORIAL).replaceAll("%WEIGHTTUTORIAL%", WEIGHTTUTORIAL).replaceAll("%INCLUDECSS%", CSS)
