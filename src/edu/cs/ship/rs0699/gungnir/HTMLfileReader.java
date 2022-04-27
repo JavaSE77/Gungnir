@@ -63,8 +63,7 @@ public class HTMLfileReader {
       //CSV record looks like this:
       //User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
       distance = csvRecord[1].replaceAll(",", "");
-      DecimalFormat df = new DecimalFormat("###.##");
-      speed = df.format(Double.parseDouble(csvRecord[4].replaceAll(",", ""))) + " MPH";
+      speed = Math.round((Double.parseDouble(csvRecord[4].replaceAll(",", "")))*100.0)/100.0 + " MPH";
       acceleration = csvRecord[5].replaceAll(",", "");
       force = csvRecord[6].replaceAll(",", "");
       } catch (IndexOutOfBoundsException e) {
