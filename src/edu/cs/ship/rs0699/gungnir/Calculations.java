@@ -30,7 +30,7 @@ public class Calculations {
       
       long timeDelta = sensorReadings[2] - sensorReadings[0];
       
-      double speed = distance / timeDelta;
+      double speed = ((distance * 2) / 5280) / (timeDelta * 1000 * 60 * 60);
       
       return speed;
     }
@@ -54,7 +54,7 @@ public class Calculations {
       long timeDeltaB = input[2] - input[1];
       
       //change is distance / change in time
-      double acceleration = distance / ((timeDeltaB - timeDeltaA) / 1000);
+      double acceleration = distance / ((timeDeltaB - timeDeltaA));
       
       return Math.abs(acceleration);
     }
