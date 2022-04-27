@@ -173,7 +173,7 @@ public class CSVhandler {
     double weight = settings.getWeight();
     double angle = settings.getAngle();
     long[] sensorReadings = {sensorAtime,sensorBtime,sensorCtime};
-    double speed = calculator.getSpeed(sensorReadings, distance);
+    double speed = Math.round(calculator.getSpeed(sensorReadings, distance) * 100.0) / 100.0;
     double acceleration = calculator.getAcceleration(sensorReadings, distance);
     double force = calculator.getForce(acceleration, weight, 32.0);
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
