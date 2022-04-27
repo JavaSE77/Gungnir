@@ -29,8 +29,8 @@ public class Calculations {
       //for our speed calculation, we are using distance / time delta
       
       long timeDelta = sensorReadings[2] - sensorReadings[0];
-      
-      double speed = ((distance * 2) / 5280) / (timeDelta * 1000 * 60 * 60);
+      //Time to go 4 feet. / 4 to get the time to go 1 foot. Then * .68 to get mph
+      double speed = ((((distance * 2)) / (timeDelta * 1000))/4 * 0.681818);
       
       return speed;
     }
