@@ -152,16 +152,9 @@ public class CSVhandler {
     //make sure all the sensors are connected
     if  ((sensorEventHandlerA != null) && (sensorEventHandlerB != null) && (sensorEventHandlerC != null)) {
      
-      //Make sure the sensors all have a record. this will prevent the sensors from reading in 
-      //reverse order
-      if(sensorEventHandlerA.hasRecord && sensorEventHandlerB.hasRecord && sensorEventHandlerC.hasRecord) {
-        
         sensorAtime = sensorEventHandlerA.sensorTime;
-        sensorEventHandlerA.hasRecord = false;
         sensorBtime = sensorEventHandlerB.sensorTime;
-        sensorEventHandlerB.hasRecord = false;
         sensorCtime = sensorEventHandlerC.sensorTime;
-        sensorEventHandlerC.hasRecord = false;
         
         
       }  
