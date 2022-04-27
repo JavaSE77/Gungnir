@@ -34,6 +34,7 @@ public class SensorEventHandler {
               if (master) {
                 //Make sure we are not adding duplicate records, we are making sure that
                 //the time sense last record is at least 100ms
+                if ( Main.verbose) System.out.println("The last record was: " +(System.currentTimeMillis() - lastRecord) + "ms ago");
                 if((System.currentTimeMillis() - lastRecord) > 1000) {
                   lastRecord = System.currentTimeMillis();
                   //add a part in here to prevent duplicate records
