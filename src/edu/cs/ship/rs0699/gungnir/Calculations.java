@@ -29,8 +29,8 @@ public class Calculations {
       //for our speed calculation, we are using distance / time delta
       
       long timeDelta = sensorReadings[2] - sensorReadings[0];
-      //Time to go 4 feet. / 4 to get the time to go 1 foot. Then * .68 to get mph
-      double speed = (((distance * 2)/(timeDelta)) / 681.818);
+      //Time to go 4 feet. / 4 to get the time to go 1 foot. Then * .682 to get mph
+      double speed = (((distance * 2)/(1/(timeDelta / 1000))) * .682);
       
       if( Main.verbose) System.out.println("Calculated speed: " + speed);
       return speed;
