@@ -30,7 +30,6 @@ public class Calculations {
       
       long timeDelta = sensorReadings[2] - sensorReadings[0];
       //Time to go 4 feet. / 4 to get the time to go 1 foot. Then * .682 to get mph
-      System.out.println("Time Delta: " + timeDelta + " distance: " + distance);//.392
       double speed = ((distance * 2)/(timeDelta / 1000.0)) * .682;
       
       if( Main.verbose) System.out.println("Calculated speed: " + speed);
@@ -53,10 +52,12 @@ public class Calculations {
       //get the speed from the first two, and compare it to the second two
       
       long timeDeltaA = input[1] - input[0];
+      System.out.println("Time Delta: " + timeDeltaA + " distance: " + distance);//.392
       long timeDeltaB = input[2] - input[1];
       
       //change is distance / change in time
       double acceleration = ((distance * 2)/(timeDeltaA / 1000.0)) * .682;
+      if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration);
       
       return Math.abs(acceleration);
     }
