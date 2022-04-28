@@ -9,6 +9,8 @@ import javax.security.auth.login.Configuration;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
+import com.pi4j.io.gpio.GpioPinDigitalOutput;
+import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 import com.sun.net.httpserver.HttpServer;
 
@@ -71,6 +73,9 @@ public class Main {
    System.out.println("Starting sensor array");
    // create gpio controller
    final GpioController gpio = GpioFactory.getInstance();
+   
+
+   final GpioPinDigitalOutput LED = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_29, "MyLED", PinState.HIGH);
    
    SensorHandler sensorA = new SensorHandler(gpio, RaspiPin.GPIO_25);
    GpioPinDigitalInput GPIOA = sensorA.setupPin();   
