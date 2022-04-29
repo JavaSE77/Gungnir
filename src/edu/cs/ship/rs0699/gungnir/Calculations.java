@@ -57,7 +57,7 @@ public class Calculations {
       long timeDeltaTotal = input[2] - input[0];
       
       //change is distance / change in time
-      double acceleration = (((distance)/(timeDeltaA / 1000.0)) * .682 - ((distance)/(timeDeltaB / 1000.0)) * .682 ) / timeDeltaTotal;
+      double acceleration = (((distance)/(timeDeltaA / 1000.0)) - ((distance)/(timeDeltaB / 1000.0))) / timeDeltaTotal;
       if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration);
       
       return Math.abs(acceleration);
