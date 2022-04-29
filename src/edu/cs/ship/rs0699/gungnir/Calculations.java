@@ -52,11 +52,12 @@ public class Calculations {
       //get the speed from the first two, and compare it to the second two
       
       long timeDeltaA = input[1] - input[0];
-      System.out.println("Time Delta: " + timeDeltaA + " distance: " + distance);//.392
+      System.out.println("Time Delta: " + timeDeltaA + "," + timeDeltaA + " distance: " + distance);//.392
       long timeDeltaB = input[2] - input[1];
+      long timeDeltaTotal = input[2] - input[0];
       
       //change is distance / change in time
-      double acceleration = ((distance * 2)/(timeDeltaA / 1000.0)) * .682;
+      double acceleration = (((distance)/(timeDeltaA / 1000.0)) * .682 - ((distance)/(timeDeltaB / 1000.0)) * .682 ) / timeDeltaTotal;
       if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration);
       
       return Math.abs(acceleration);
