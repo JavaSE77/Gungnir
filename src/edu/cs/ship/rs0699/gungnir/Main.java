@@ -60,6 +60,8 @@ public class Main {
     server.createContext("/input", new InputHandler());
     server.createContext("/About", new PageHandler("About.html",CSV));
     server.createContext("/results", new PageHandler("Results.html",CSV));
+    server.createContext("/previous_results", new CSV2WebOutput(CSV));
+    server.createContext("/data", new CSVzipper(CSV));
     server.setExecutor(null); // creates a default executor
     server.start();
     

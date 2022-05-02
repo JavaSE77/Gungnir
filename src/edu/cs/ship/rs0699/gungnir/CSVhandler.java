@@ -3,6 +3,7 @@ package edu.cs.ship.rs0699.gungnir;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -11,6 +12,8 @@ import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 public class CSVhandler {
   
@@ -32,6 +35,8 @@ public class CSVhandler {
    * Read the entire CSV file as a string
    * */
   public String readFile() {
+    //just on the off case the file has changed between reads
+    fileName = pickCSVFile();
     
     StringBuilder sb = new StringBuilder();
     
@@ -280,5 +285,41 @@ public class CSVhandler {
     return fileName;
   }
 
+  
+  /**
+   * https://stackoverflow.com/questions/3961087/zipping-a-folder-which-contains-subfolders
+   * */
+  public void addDirToZipArchive(File fileToZip, String parrentDirectoryName) throws Exception {
+    FileOutputStream fos = new FileOutputStream("archive.zip");
+    ZipOutputStream zos = new ZipOutputStream(fos);
+    if (fileToZip == null || !fileToZip.exists()) {
+        zos.close();
+        return;
+    }
+
+    String zipEntryName = fileToZip.getName();
+    if (parrentDirectoryName!=null && !parrentDirectoryName.isEmpty()) {
+        zipEntryName = parrentDirectoryName + "/" + fileToZip.getName();
+    }
+
+    if (fileToZip.isDirectory()) {
+        if (Main.verbose ) System.out.println("+" + zipEntryName);
+        for (File file : fileToZip.listFiles()) {
+            addDirToZipArchive(file, zipEntryName);
+        }
+    } else {
+        if (Main.verbose) System.out.println("   " + zipEntryName);
+        byte[] buffer = new byte[1024];
+        FileInputStream fis = new FileInputStream(fileToZip);
+        zos.putNextEntry(new ZipEntry(zipEntryName));
+        int length;
+        while ((length = fis.read(buffer)) > 0) {
+            zos.write(buffer, 0, length);
+        }
+        zos.closeEntry();
+        zos.close();
+        fis.close();
+    }
+}
   
 }
