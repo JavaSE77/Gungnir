@@ -58,7 +58,8 @@ public class Calculations {
       
       //change is distance / change in time
       double acceleration = (((distance)/(timeDeltaA / 1000.0)) - ((distance)/(timeDeltaB / 1000.0))) / (timeDeltaTotal/1000);
-      if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration);
+      if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration + " Calculated from: " + 
+      ((distance)/(timeDeltaA / 1000.0)) + " - " + ((distance)/(timeDeltaB / 1000.0)) + " total time: " + (timeDeltaTotal/1000));
       
       return Math.abs(acceleration);
     }

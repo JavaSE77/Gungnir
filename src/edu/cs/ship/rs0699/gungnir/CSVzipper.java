@@ -33,7 +33,7 @@ public class CSVzipper implements HttpHandler {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-    String response = "Thank you for downloading our records.";
+
     exchange.sendResponseHeaders(responseCode, data.length);
     OutputStream os = exchange.getResponseBody();
     os.write(data);
