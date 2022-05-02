@@ -55,11 +55,12 @@ public class Calculations {
       System.out.println("Time Delta: " + timeDeltaA + "," + timeDeltaA + " distance: " + distance);//.392
       long timeDeltaB = input[2] - input[1];
       long timeDeltaTotal = input[2] - input[0];
+      double totalTimeInSeconds = timeDeltaTotal / 1000.0;
       
       //change is distance / change in time
-      double acceleration = (((distance)/(timeDeltaA / 1000.0)) - ((distance)/(timeDeltaB / 1000.0))) / (timeDeltaTotal/1000);
+      double acceleration = (((distance)/(timeDeltaA / 1000.0)) - ((distance)/(timeDeltaB / 1000.0))) / (totalTimeInSeconds);
       if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration + " Calculated from: " + 
-      ((distance)/(timeDeltaA / 1000.0)) + " - " + ((distance)/(timeDeltaB / 1000.0)) + " total time: " + (timeDeltaTotal));
+      ((distance)/(timeDeltaA / 1000.0)) + " - " + ((distance)/(timeDeltaB / 1000.0)) + " total time: " + (totalTimeInSeconds));
       
       return Math.abs(acceleration);
     }
