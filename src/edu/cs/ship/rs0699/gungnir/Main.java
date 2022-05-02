@@ -3,6 +3,7 @@ package edu.cs.ship.rs0699.gungnir;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Executors;
 
 import javax.security.auth.login.Configuration;
 
@@ -56,6 +57,9 @@ public class Main {
         System.out.println("HTTP is now online. To view to go: "+ serverHandler.getURL());
       }
     }
+    
+    
+    server.setExecutor(Executors.newCachedThreadPool());
     server.createContext("/", new MainHandler());
     server.createContext("/input", new InputHandler());
     server.createContext("/About", new PageHandler("About.html",CSV));
