@@ -62,10 +62,10 @@ public class HTMLfileReader {
       String[] csvRecord = csv.getLastRecord().split(",");
       //CSV record looks like this:
       //User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date
-      distance = csvRecord[1].replaceAll(",", "");
+      distance = csvRecord[1].replaceAll(",", "") + " feet";
 //      speed = Math.round((Double.parseDouble(csvRecord[4].replaceAll(",", "")))*100.0)/100.0 + " MPH";
       speed = csvRecord[4].replaceAll(",", "") + " MPH";
-      acceleration = csvRecord[6].replaceAll(",", "") + " MPHPS";
+      acceleration = csvRecord[6].replaceAll(",", "") + " FPS";
       force = csvRecord[7].replaceAll(",", "");
       } catch (IndexOutOfBoundsException e) {
         if (Main.verbose) e.printStackTrace();

@@ -82,6 +82,19 @@ public class Calculations {
     return acceleration * m;
   }
   
+  /**
+   * double acceleration, double weight, double gravity
+   * (all units must be the same type of units, either SI or imperial)
+   * @return double expected distance
+   * R = V² * sin(2α) / g
+   * https://www.omnicalculator.com/physics/projectile-motion#:~:text=The%20equation%20for%20the%20distance,is%20when%202%CE%B8%20%3D%2090%20degrees.
+   * */
+  public double getExpectedDistance(double acceleration, double gravity, double angle) {
+    
+    double R = (Math.pow((acceleration),2) * Math.sin(Math.toRadians(2* angle))) / gravity;
+    
+    return R;
+  }
   
   
 }
