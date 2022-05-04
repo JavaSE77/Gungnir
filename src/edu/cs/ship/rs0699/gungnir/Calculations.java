@@ -76,7 +76,7 @@ public class Calculations {
   public double getForce(double acceleration, double weight, double gravity) {
     //f = m * A
     // m = weight * g
-    double m = weight * gravity;
+    double m = weight / gravity;
 
     
     return acceleration * m;
