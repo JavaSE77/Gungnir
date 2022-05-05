@@ -27,10 +27,11 @@ public class Calculations {
     if(sensorReadings.length == 3) {
       
       //for our speed calculation, we are using distance / time delta
+      //coef of friction is .4. Multiply by 1.7 to account for friction
       
       long timeDelta = sensorReadings[2] - sensorReadings[0];
       //Time to go 4 feet. / 4 to get the time to go 1 foot. Then * .682 to get mph
-      double speed = ((distance * 2)/(timeDelta / 1000.0)) * .682;
+      double speed = (((distance * 2)/(timeDelta / 1000.0))*1.7) * .682;
       
       if( Main.verbose) System.out.println("Calculated speed: " + speed);
       return speed;
@@ -58,9 +59,10 @@ public class Calculations {
       double totalTimeInSeconds = timeDeltaTotal / 1000.0;
       
       //change is distance / change in time
-      double acceleration = (((distance)/(timeDeltaA / 1000.0)) - ((distance)/(timeDeltaB / 1000.0))) / (totalTimeInSeconds);
+      double acceleration = ((((distance)/(timeDeltaA / 1000.0))*1.7) - (((distance)/(timeDeltaB / 1000.0))*1.7)) / (totalTimeInSeconds);
       if( Main.verbose) System.out.println("Calculated acceleration: " + acceleration + " Calculated from: " + 
       ((distance)/(timeDeltaA / 1000.0)) + " - " + ((distance)/(timeDeltaB / 1000.0)) + " total time: " + (totalTimeInSeconds));
+
       
       return Math.abs(acceleration);
     }
