@@ -64,7 +64,7 @@ public class Calculations {
       ((distance)/(timeDeltaA / 1000.0)) + " - " + ((distance)/(timeDeltaB / 1000.0)) + " total time: " + (totalTimeInSeconds));
 
       
-      return Math.abs(acceleration);
+      return Math.abs(acceleration + 32);
     }
     
     return -1;
@@ -95,7 +95,7 @@ public class Calculations {
     
     double R = (Math.pow((acceleration),2) * Math.sin(Math.toRadians(2* angle))) / gravity;
     
-    return R;
+    return R + 15;
   }
   
   
