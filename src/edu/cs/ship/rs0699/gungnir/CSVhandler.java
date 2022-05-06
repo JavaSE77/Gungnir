@@ -126,8 +126,8 @@ public class CSVhandler {
       if(!file.exists()) {
         //file.getParentFile().mkdirs(); // Will create parent directories if not exists
         file.createNewFile();
-        appendLineNoErrorChecking("User,Distance,Weight,Angle,Speed,Acceleration,Force,sensorA,sensorB,SensorC,date");
-        appendLineNoErrorChecking("Test,100,5,45,100,10,200,0,0,0,4/1/22");
+        appendLineNoErrorChecking("User,Distance,Weight,Angle,Speed,sensorA,sensorB,SensorC,date");
+        appendLineNoErrorChecking("Test,100,5,45,100,0,0,0,4/1/22");
       }
       
     BufferedWriter outputStream = new BufferedWriter(new FileWriter(fileName, true));
@@ -168,8 +168,6 @@ public class CSVhandler {
     
     
     
-    File currentRecordFile = new File(fileName);
-    
     //CSV header looks like:
     //User  Distance  Weight  Speed Acceleration  Force sensorA sensorB SensorC date
     String user = settings.getUser();
@@ -178,8 +176,8 @@ public class CSVhandler {
     double angle = settings.getAngle();
     long[] sensorReadings = {sensorAtime,sensorBtime,sensorCtime};
     double speed = Math.round((calculator.getSpeed(sensorReadings, distanceBetweenSensors) * 100.0)) / 100.0;
-    double acceleration =  Math.round((calculator.getAcceleration(sensorReadings, distanceBetweenSensors) * 100.0)) / 100.0;
-    double force = Math.round(calculator.getForce(acceleration, weight, 32.0) * 100.0) / 100.0;
+    //double acceleration =  Math.round((calculator.getAcceleration(sensorReadings, distanceBetweenSensors) * 100.0)) / 100.0;
+    //double force = Math.round(calculator.getForce(acceleration, weight, 32.0) * 100.0) / 100.0;
     double distance = Math.round((calculator.getExpectedDistance(speed, 32.0, angle) * 100.0)) / 100.0;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
     Date date = new Date();
@@ -198,10 +196,10 @@ public class CSVhandler {
     sb.append(angle);
     sb.append(",");
     sb.append(speed);
-    sb.append(",");
-    sb.append(acceleration);
-    sb.append(",");
-    sb.append(force);
+//    sb.append(",");
+//    sb.append(acceleration);
+//    sb.append(",");
+//    sb.append(force);
     sb.append(",");
     sb.append(sensorAtime);
     sb.append(",");

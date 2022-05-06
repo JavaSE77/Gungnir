@@ -45,6 +45,7 @@ public class Calculations {
    * long[] input, double distance
    * readings from the 3 sensors, amount of distance between the fixed sensors
    * @return the abs of acceleration
+   * @deprecated
    * */
   public double getAcceleration(long[] input, double distance) {
     
@@ -75,6 +76,7 @@ public class Calculations {
    * double acceleration, double weight, double gravity
    * (all units must be the same type of units, either SI or imperial)
    * @return double force
+   * @deprecated
    * */
   public double getForce(double acceleration, double weight, double gravity) {
     //f = m * A

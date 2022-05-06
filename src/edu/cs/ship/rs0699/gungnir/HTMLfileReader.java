@@ -65,8 +65,8 @@ public class HTMLfileReader {
       distance = csvRecord[1].replaceAll(",", "") + " feet";
 //      speed = Math.round((Double.parseDouble(csvRecord[4].replaceAll(",", "")))*100.0)/100.0 + " MPH";
       speed = csvRecord[4].replaceAll(",", "") + " MPH";
-      acceleration = csvRecord[6].replaceAll(",", "") + " FPS";
-      force = csvRecord[7].replaceAll(",", "") + " pounds";
+      //acceleration = csvRecord[6].replaceAll(",", "") + " FPS";
+      //force = csvRecord[7].replaceAll(",", "") + " pounds";
       } catch (IndexOutOfBoundsException e) {
         if (Main.verbose) e.printStackTrace();
         System.out.println("Error reading results from CSV");
