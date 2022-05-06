@@ -31,7 +31,8 @@ public class Calculations {
       
       long timeDelta = sensorReadings[2] - sensorReadings[0];
       //Time to go 4 feet. / 4 to get the time to go 1 foot. Then * .682 to get mph
-      double speed = (((distance * 2)/(timeDelta / 1000.0))*1.7) * .682;
+      //We have found the Erika constant to be about 3.2. Multiplying this value by 3.2 gives a normal value
+      double speed = (((distance * 2)/(timeDelta / 1000.0)) * Math.PI) * .682;
       
       if( Main.verbose) System.out.println("Calculated speed: " + speed);
       return speed;
@@ -93,9 +94,10 @@ public class Calculations {
    * */
   public double getExpectedDistance(double acceleration, double gravity, double angle) {
     
-    double R = (Math.pow((acceleration),2) * Math.sin(Math.toRadians(2* angle))) / gravity;
+    //acceleration * 1.46 to go from MPH to fps
+    double R = (Math.pow((acceleration * 1.46),2) * Math.sin(Math.toRadians(2* angle))) / gravity;
     
-    return R + 15;
+    return R;
   }
   
   

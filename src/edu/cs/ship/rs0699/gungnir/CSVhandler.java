@@ -180,7 +180,7 @@ public class CSVhandler {
     double speed = Math.round((calculator.getSpeed(sensorReadings, distanceBetweenSensors) * 100.0)) / 100.0;
     double acceleration =  Math.round((calculator.getAcceleration(sensorReadings, distanceBetweenSensors) * 100.0)) / 100.0;
     double force = Math.round(calculator.getForce(acceleration, weight, 32.0) * 100.0) / 100.0;
-    double distance = Math.round((calculator.getExpectedDistance(acceleration, 32.0, angle) * 100.0)) / 100.0;
+    double distance = Math.round((calculator.getExpectedDistance(speed, 32.0, angle) * 100.0)) / 100.0;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss.SSS");
     Date date = new Date();
     String dateHumanReadable = sdf.format(date); 
@@ -198,8 +198,6 @@ public class CSVhandler {
     sb.append(angle);
     sb.append(",");
     sb.append(speed);
-    sb.append(",");
-    sb.append(weight);
     sb.append(",");
     sb.append(acceleration);
     sb.append(",");
